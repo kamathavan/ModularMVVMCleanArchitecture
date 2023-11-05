@@ -4,8 +4,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -17,7 +15,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.app.feature.coffee.model.CoffeeUiState
-import com.app.test.coffee.domain.model.Coffee
 
 @Composable
 fun CoffeeHomeScreen(viewModel: CoffeeListViewModel = hiltViewModel()) {
@@ -46,7 +43,7 @@ fun LoadingContent() {
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        CircularProgressIndicator()
+        CircularProgressIndicator(modifier = Modifier.align(alignment = Alignment.Center))
     }
 }
 
@@ -67,14 +64,4 @@ fun ErrorScreen(error: String) {
     }
 }
 
-@Composable
-fun CoffeeListScreen(coffees: List<Coffee>) {
 
-    LazyColumn(modifier = Modifier.padding(20.dp)) {
-        items(coffees) { coffee ->
-            CoffeeItem(
-                coffee = coffee,
-            )
-        }
-    }
-}
