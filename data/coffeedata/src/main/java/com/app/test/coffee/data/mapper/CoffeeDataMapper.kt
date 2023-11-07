@@ -12,9 +12,15 @@ class CoffeeDataMapper @Inject constructor() {
                 title = data.title,
                 description = data.description,
                 image = data.image,
-                ingredients = data.ingredients,
+                ingredients = getIngredients(data.ingredients),
                 id = data.id
             )
+        }
+    }
+
+    private fun getIngredients(ingredients: List<String>): String {
+        return ingredients.joinToString(separator = ",") {
+            it
         }
     }
 }
