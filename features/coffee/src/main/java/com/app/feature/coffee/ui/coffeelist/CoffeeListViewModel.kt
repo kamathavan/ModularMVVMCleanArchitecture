@@ -25,7 +25,6 @@ class CoffeeListViewModel @Inject constructor(
 
     fun getCoffeeList() {
         _uiState.value = CoffeeUiState.Loading
-
         viewModelScope.launch {
             when (val result = getHotCoffeeUseCase()) {
                 is RequestState.SuccessState -> {

@@ -37,7 +37,7 @@ class CoffeeUseCaseTest {
                 title = "some_title",
                 description = "some_description",
                 image = "some_image",
-                ingredients = listOf<String>("some_ingridient1", "some_ingridient2"),
+                ingredients = "some_ingridient1,some_ingridient2",
                 id = "some_id"
             )
         )
@@ -50,7 +50,7 @@ class CoffeeUseCaseTest {
         val actualResult = cut.invoke()
 
         //Then
-       assertEquals(expectedResult, actualResult)
+        assertEquals(expectedResult, actualResult)
     }
 
 

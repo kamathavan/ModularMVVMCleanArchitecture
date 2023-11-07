@@ -66,7 +66,7 @@ fun CoffeeDetailsScreen(coffee: Coffee?) {
                             horizontalArrangement = Arrangement.Start
                         ) {
                             Text(
-                                text = coffee?.title ?: "",
+                                text = coffee?.title ?: "No Title",
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold,
                                 textAlign = TextAlign.Start
