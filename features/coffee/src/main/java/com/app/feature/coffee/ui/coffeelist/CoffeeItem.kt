@@ -2,7 +2,6 @@ package com.app.feature.coffee.ui.coffeelist
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -23,13 +22,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.app.feature.coffee.ui.Screens
 import com.app.test.coffee.domain.model.Coffee
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CoffeeListScreen(coffees: List<Coffee>) {
+fun CoffeeListScreen(navigationController: NavController, coffees: List<Coffee>) {
     Surface(
         modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
     ) {
@@ -42,6 +43,7 @@ fun CoffeeListScreen(coffees: List<Coffee>) {
                 items(coffees) { coffee ->
                     CoffeeItem(
                         coffee = coffee,
+                        navigationController,
                     )
                 }
             }
@@ -53,6 +55,7 @@ fun CoffeeListScreen(coffees: List<Coffee>) {
 @Composable
 fun CoffeeItem(
     coffee: Coffee,
+    navigationController: NavController
 ) {
 
     Card(
@@ -60,9 +63,9 @@ fun CoffeeItem(
             .fillMaxWidth()
             .padding(14.dp),
         onClick = {
-            /* navigationController.navigate(
-                 route = "${Screens.CoffeeDetails.route}/$coffeeId"
-             )*/
+            navigationController.navigate(
+                route = "${Screens.CoffeeDetails.route}/${coffee.id}"
+            )
         }
     ) {
 
@@ -88,19 +91,6 @@ fun CoffeeItem(
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(12.dp))
             )
-
-            LazyRow(
-                horizontalArrangement = Arrangement.spacedBy(
-                    4.dp,
-                    alignment = Alignment.Start
-                ),
-                modifier = Modifier
-                    .fillMaxWidth(),
-            ) {
-                items(items = coffee.ingredients) { ingredient ->
-                    IngredientChip(text = ingredient)
-                }
-            }
         }
 
     }

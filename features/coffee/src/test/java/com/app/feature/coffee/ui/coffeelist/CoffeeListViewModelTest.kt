@@ -14,7 +14,10 @@ import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
 
+@RunWith(JUnit4::class)
 @ExperimentalCoroutinesApi
 class CoffeeListViewModelTest :
     BaseCoroutineTestWithTestDispatcherProviderAndInstantTaskExecutorRule(
@@ -42,7 +45,7 @@ class CoffeeListViewModelTest :
                     title = "some_title",
                     description = "some_description",
                     image = "some_image",
-                    ingredients = listOf("some_ingridient1", "some_ingridient2"),
+                    ingredients = "some_ingridient,some_ingridient2",
                     id = "some_id"
                 )
             )
@@ -61,6 +64,7 @@ class CoffeeListViewModelTest :
         runTest {
             //Given
             val exceptionResponse = Exception("test exception")
+
             val expectedResult = RequestState.FailureState(error = exceptionResponse)
             coEvery { getHotCoffeeUseCase.invoke() } returns expectedResult
 

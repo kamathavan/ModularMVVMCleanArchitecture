@@ -8,7 +8,6 @@ import org.junit.Rule
 abstract class BaseCoroutineTestWithTestDispatcherProvider(
     private val dispatcher: TestDispatcher
 ) {
-
     /**
      * Sets the Main dispatcher to the test dispatcher provided as input.
      */

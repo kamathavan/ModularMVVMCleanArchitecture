@@ -87,7 +87,7 @@ class CoffeeRepositoryImplTest {
             title = "some_title",
             description = "some_description",
             image = "some_image",
-            ingredients = listOf<String>("some_ingridient1", "some_ingridient2"),
+            ingredients = listOf("some_ingridient1", "some_ingridient2"),
             id = "some_id"
         )
     )
@@ -97,7 +97,7 @@ class CoffeeRepositoryImplTest {
             title = "some_title",
             description = "some_description",
             image = "some_image",
-            ingredients = listOf<String>("some_ingridient1", "some_ingridient2"),
+            ingredients = "some_ingridient1,some_ingridient2",
             id = "some_id"
         )
     )

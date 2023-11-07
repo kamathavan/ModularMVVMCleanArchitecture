@@ -14,7 +14,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.app.feature.coffee.model.CoffeeUiState
+import com.app.feature.coffee.ui.Screens
+import com.app.feature.coffee.ui.coffeedetails.CoffeeDetailsScreen
+import com.app.test.coffee.domain.model.Coffee
 
 @Composable
 fun CoffeeHomeScreen(viewModel: CoffeeListViewModel = hiltViewModel()) {
@@ -26,7 +34,7 @@ fun CoffeeHomeScreen(viewModel: CoffeeListViewModel = hiltViewModel()) {
             is CoffeeUiState.Loading -> LoadingContent()
 
             is CoffeeUiState.Success -> {
-                CoffeeListScreen(it.coffees)
+                CoffeeNavigation(it.coffees)
             }
 
             is CoffeeUiState.Error -> {
@@ -64,4 +72,33 @@ fun ErrorScreen(error: String) {
     }
 }
 
+@Composable
+fun CoffeeNavigation(coffees: List<Coffee>) {
+    val navController = rememberNavController()
 
+    NavHost(navController = navController, startDestination = Screens.CoffeeList.route) {
+
+        composable(route = Screens.CoffeeList.route) {
+            CoffeeListScreen(
+                navigationController = navController,
+                coffees,
+            )
+        }
+
+        composable(route = "${Screens.CoffeeDetails.route}/{coffeeId}",
+            arguments = listOf(
+                navArgument(name = "coffeeId") {
+                    type = NavType.StringType
+                }
+            )
+        ) {
+            val id = it.arguments?.getString("coffeeId")
+            val coffee = coffees.first { coffee -> (coffee.id == id) }
+
+            CoffeeDetailsScreen(
+                coffee = coffee,
+            )
+        }
+    }
+
+}
