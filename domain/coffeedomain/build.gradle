@@ -42,8 +42,9 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:2.44"
 
     testImplementation 'junit:junit:4.13.2'
-    testImplementation "io.mockk:mockk:$mockk_version"
     testImplementation "com.google.truth:truth:1.1.3"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_test_version"
-    androidTestImplementation "androidx.test.ext:junit:$androidx_junit_version"
+    testImplementation 'io.mockk:mockk:1.13.4'
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
+    testImplementation "androidx.arch.core:core-testing:2.2.0"
+    testImplementation "io.strikt:strikt-core:$strikt_version"
 }
