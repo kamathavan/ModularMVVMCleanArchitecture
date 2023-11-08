@@ -5,61 +5,63 @@ import com.app.test.coffee.domain.model.Coffee
 import com.app.test.coffee.domain.model.RequestState
 import com.app.test.coffee.domain.usecase.GetHotCoffeeUseCase
 import com.google.common.truth.Truth.assertThat
+import io.mockk.MockKAnnotations
 import io.mockk.coEvery
-import io.mockk.mockk
+import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import strikt.api.expectThat
+import strikt.assertions.isA
+import strikt.assertions.isEqualTo
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class CoffeeListViewModelTest {
 
-    private val getHotCoffeeUseCase: GetHotCoffeeUseCase = mockk()
-
-    private lateinit var viewModel: CoffeeListViewModel
-
-    private lateinit var viewStates: MutableList<CoffeeUiState>
-
     @get:Rule
     val rule = MainDispatcherRule()
 
+    @MockK
+    private lateinit var getHotCoffeeUseCase: GetHotCoffeeUseCase
+
+    private lateinit var viewModel: CoffeeListViewModel
+
+
     @Before
     fun setUp() {
-        //MockKAnnotations.init(this, relaxUnitFun = true)
+        MockKAnnotations.init(this)
         viewModel = CoffeeListViewModel(getHotCoffeeUseCase = getHotCoffeeUseCase)
-        viewModel.uiState.observeForever {
-            viewStates.add(it)
-        }
     }
 
     @Test
-    fun `Given coffee list, When coffee ui state success, Then return list of Coffee list response`()= runTest {
-        // Given
-        val coffeeList = listOf(
-            Coffee(
-                title = "some_title",
-                description = "some_description",
-                image = "some_image",
-                ingredients = "some_ingridient,some_ingridient2",
-                id = "some_id"
+    fun `Given coffee list, When coffee ui state success, Then return list of Coffee list response`() =
+        runTest {
+            // Given
+            val coffeeList = listOf(
+                Coffee(
+                    title = "some_title",
+                    description = "some_description",
+                    image = "some_image",
+                    ingredients = "some_ingridient,some_ingridient2",
+                    id = "some_id"
+                )
             )
-        )
 
-        coEvery { getHotCoffeeUseCase() } returns RequestState.SuccessState(coffeeList)
+            coEvery { getHotCoffeeUseCase.invoke() } returns RequestState.SuccessState(coffeeList)
 
-        // When
-        viewModel.getCoffeeList()
+            // When
+            viewModel.getCoffeeList()
 
-        // Then
-        assertThat(viewModel.uiState.value).isEqualTo(CoffeeUiState.Success(coffees = coffeeList))
-    }
+            // Then
+            assertThat(viewModel.uiState.value).isEqualTo(CoffeeUiState.Success(coffees = coffeeList))
+        }
 
     @Test
     fun `Given coffee response, When coffee ui state failure, Then return  error response`() {
         //Given
-        val exceptionResponse = Exception("test exception")
+        val exceptionResponse = Throwable("test exception")
 
         val expectedResult = RequestState.FailureState(error = exceptionResponse)
         coEvery { getHotCoffeeUseCase.invoke() } returns expectedResult
@@ -68,7 +70,9 @@ class CoffeeListViewModelTest {
         viewModel.getCoffeeList()
 
         //Then
-        assertThat(viewModel.uiState.value).isEqualTo(CoffeeUiState.Error("test exception"))
+        expectThat(viewModel.uiState.value).isA<CoffeeUiState.Error>().and {
+            get { this.message }.isEqualTo(exceptionResponse.toString())
+        }
 
     }
 
