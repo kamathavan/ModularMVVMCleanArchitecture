@@ -8,7 +8,6 @@ import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
-import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import strikt.api.expectThat
@@ -69,7 +68,7 @@ class CoffeeUseCaseTest {
         val actualResult = cut.invoke()
 
         //Then
-        assertEquals(expectedResult, actualResult)
+        expectThat(actualResult).isEqualTo(expectedResult)
     }
 
 }
