@@ -15,7 +15,7 @@
         android:theme="@style/Theme.CoffeeAppModularMVVM"
         tools:targetApi="31">
         <activity
-            android:name="com.app.feature.coffee.MainActivity"
+            android:name="com.app.feature.coffee.CoffeeHomeScreenActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.CoffeeAppModularMVVM">
