@@ -11,8 +11,10 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
+import strikt.api.expectThat
+import strikt.assertions.isEqualTo
 
-@ExperimentalCoroutinesApi
+@OptIn(ExperimentalCoroutinesApi::class)
 class CoffeeUseCaseTest {
 
     private lateinit var cut: GetHotCoffeeUseCase
@@ -24,6 +26,7 @@ class CoffeeUseCaseTest {
     @Before
     fun setUp() {
         MockKAnnotations.init(this)
+
         cut = GetHotCoffeeUseCase(
             coffeeRepository = coffeeRepository
         )
@@ -32,7 +35,7 @@ class CoffeeUseCaseTest {
     @Test
     fun `invoke with success response state`() = runTest {
         //given
-        val listOfCoffee = listOf(
+        val listOfCoffee = mutableListOf<Coffee>(
             Coffee(
                 title = "some_title",
                 description = "some_description",
@@ -50,7 +53,7 @@ class CoffeeUseCaseTest {
         val actualResult = cut.invoke()
 
         //Then
-        assertEquals(expectedResult, actualResult)
+        expectThat(actualResult).isEqualTo(expectedResult)
     }
 
 
