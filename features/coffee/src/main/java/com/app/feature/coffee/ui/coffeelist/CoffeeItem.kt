@@ -39,7 +39,10 @@ fun CoffeeListScreen(navigationController: NavController, coffees: List<Coffee>)
                 AppBar(title = "Coffee list")
             },
         ) {
-            LazyColumn(modifier = Modifier.padding(it)) {
+            LazyColumn(
+                modifier = Modifier.padding(it),
+                userScrollEnabled = true,
+            ) {
                 items(coffees) { coffee ->
                     CoffeeItem(
                         coffee = coffee,
