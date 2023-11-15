@@ -1,6 +1,7 @@
 package com.app.test.coffee.data.mapper
 
 import com.app.test.coffee.data.model.CoffeeResponse
+import com.app.test.coffee.data.utils.Constants.SEPARATOR
 import com.app.test.coffee.domain.model.Coffee
 import javax.inject.Inject
 
@@ -19,7 +20,7 @@ class CoffeeDataMapper @Inject constructor() {
     }
 
     private fun getIngredients(ingredients: List<String>): String {
-        return ingredients.joinToString(separator = ",") {
+        return ingredients.joinToString(separator = SEPARATOR) {
             it
         }
     }

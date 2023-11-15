@@ -21,24 +21,26 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.app.feature.coffee.R
 import com.app.feature.coffee.ui.coffeelist.AppBar
 import com.app.feature.coffee.ui.theme.Brown
 import com.app.test.coffee.domain.model.Coffee
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Composable()
+@Composable
 fun CoffeeDetailsScreen(coffee: Coffee?) {
     Surface(
         modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
     ) {
         Scaffold(
             topBar = {
-                AppBar(title = "Coffee Details")
+                AppBar(title = stringResource(id = R.string.feature_coffee_details_title))
             },
         ) {
             Column(
@@ -66,7 +68,7 @@ fun CoffeeDetailsScreen(coffee: Coffee?) {
                             horizontalArrangement = Arrangement.Start
                         ) {
                             Text(
-                                text = coffee?.title ?: "No Title",
+                                text = coffee?.title ?: stringResource(R.string.feature_coffee_no_title_message),
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold,
                                 textAlign = TextAlign.Start
@@ -76,24 +78,23 @@ fun CoffeeDetailsScreen(coffee: Coffee?) {
                         AsyncImage(
                             model = coffee?.image,
                             contentScale = ContentScale.Crop,
-                            contentDescription = "image description",
+                            contentDescription = stringResource(R.string.feature_coffee_image_description),
                             modifier = Modifier
                                 .height(320.dp)
                                 .fillMaxWidth()
                                 .clip(RoundedCornerShape(12.dp))
                         )
-
-                        CoffeeContentTitle(contentTitle = "Descriptions:")
+                        CoffeeContentTitle(contentTitle = stringResource(R.string.feature_coffee_title_description))
 
                         Text(
-                            text = coffee?.description ?: "Description is not available",
+                            text = coffee?.description ?: stringResource(R.string.feature_coffee_description_is_not_available),
                             textAlign = TextAlign.Justify
                         )
 
-                        CoffeeContentTitle(contentTitle = "Ingredients:")
+                        CoffeeContentTitle(contentTitle = stringResource(R.string.feature_coffee_title_ingredients))
 
                         CoffeeIngredientDetails(
-                            ingredients = coffee?.ingredients ?: "Ingredient is not available"
+                            ingredients = coffee?.ingredients ?: stringResource(R.string.feature_coffee_ingredient_is_not_available)
                         )
                     }
                 }
