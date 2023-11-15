@@ -18,12 +18,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.app.feature.coffee.R
 import com.app.feature.coffee.ui.Screens
 import com.app.test.coffee.domain.model.Coffee
 
@@ -36,7 +38,7 @@ fun CoffeeListScreen(navigationController: NavController, coffees: List<Coffee>)
     ) {
         Scaffold(
             topBar = {
-                AppBar(title = "Coffee list")
+                AppBar(title = stringResource(R.string.coffee_feature_coffee_list_title))
             },
         ) {
             LazyColumn(
@@ -80,7 +82,8 @@ fun CoffeeItem(
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Text(
-                text = coffee.title ?: "Title is not available",
+                text = coffee.title
+                    ?: stringResource(R.string.feature_coffee_title_is_not_available),
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
             )
@@ -88,7 +91,7 @@ fun CoffeeItem(
             AsyncImage(
                 model = coffee.image,
                 contentScale = ContentScale.Crop,
-                contentDescription = "image description",
+                contentDescription = stringResource(R.string.feature_coffee_image_description),
                 modifier = Modifier
                     .height(320.dp)
                     .fillMaxWidth()

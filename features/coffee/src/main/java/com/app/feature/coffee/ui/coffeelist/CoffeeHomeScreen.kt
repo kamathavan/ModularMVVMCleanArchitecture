@@ -24,6 +24,7 @@ import com.app.feature.coffee.ui.Screens
 import com.app.feature.coffee.ui.coffeedetails.CoffeeDetailsScreen
 import com.app.test.coffee.domain.model.Coffee
 
+const val CONSTANT_ID_KEY  = "coffeeId"
 @Composable
 fun CoffeeHomeScreen(viewModel: CoffeeListViewModel = hiltViewModel()) {
 
@@ -85,14 +86,14 @@ fun CoffeeNavigation(coffees: List<Coffee>) {
             )
         }
 
-        composable(route = "${Screens.CoffeeDetails.route}/{coffeeId}",
+        composable(route = "${Screens.CoffeeDetails.route}/{$CONSTANT_ID_KEY}",
             arguments = listOf(
-                navArgument(name = "coffeeId") {
+                navArgument(name = CONSTANT_ID_KEY) {
                     type = NavType.StringType
                 }
             )
         ) {
-            val id = it.arguments?.getString("coffeeId")
+            val id = it.arguments?.getString(CONSTANT_ID_KEY)
             val coffee = coffees.first { coffee -> (coffee.id == id) }
 
             CoffeeDetailsScreen(
