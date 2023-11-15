@@ -14,9 +14,9 @@ import dagger.hilt.components.SingletonComponent
 abstract class DataModule {
 
     @Binds
-    abstract fun bindCoffeeRepository(coinRepositoryImpl: CoffeeRepositoryImpl): CoffeeRepository
+    abstract fun bindCoffeeRepository(coffeeRepository: CoffeeRepositoryImpl): CoffeeRepository
 
     @Binds
-    abstract fun bindCoffeeDataSourceRepository(coinRepositoryImpl: CoffeeDataSourceImpl): CoffeeDataSource
+    abstract fun bindCoffeeDataSource(coffeeDataSource: CoffeeDataSourceImpl): CoffeeDataSource
 
 }
