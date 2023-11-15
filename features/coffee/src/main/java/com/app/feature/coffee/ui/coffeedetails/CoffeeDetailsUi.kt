@@ -33,7 +33,7 @@ import com.app.feature.coffee.ui.theme.Brown
 import com.app.test.coffee.domain.model.Coffee
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Composable()
+@Composable
 fun CoffeeDetailsScreen(coffee: Coffee?) {
     Surface(
         modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
