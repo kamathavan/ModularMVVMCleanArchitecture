@@ -29,7 +29,6 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.app.feature.coffee.R
 import com.app.feature.coffee.ui.coffeelist.AppBar
-import com.app.feature.coffee.ui.theme.Brown
 import com.app.test.coffee.domain.model.Coffee
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -128,15 +127,9 @@ fun CoffeeIngredientDetails(ingredients: String) {
     ) {
         Text(
             text = ingredients,
-            fontSize = 14.sp,
-            fontWeight = FontWeight.Normal,
-            textAlign = TextAlign.Start,
-            color = Brown,
-            style = MaterialTheme.typography.bodyMedium,
-            modifier = Modifier.padding(2.dp)
+            textAlign = TextAlign.Justify,
         )
     }
-
 }
 
 
