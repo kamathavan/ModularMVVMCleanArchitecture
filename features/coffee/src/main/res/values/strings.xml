@@ -11,8 +11,5 @@
     <string name="coffee_feature_coffee_list_title">Coffee List</string>
     <string name="feature_coffee_title_is_not_available">Title is not available</string>
     <string name="feature_coffee_title_master_test">1</string>
-
-    <string name="feature_coffee_title_test1">Test 1 </string>
-    <string name="feature_coffee_title_test2">Test 2 </string>
-
+    
 </resources>
