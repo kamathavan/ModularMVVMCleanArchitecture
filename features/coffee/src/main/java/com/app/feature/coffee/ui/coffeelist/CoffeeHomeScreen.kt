@@ -71,8 +71,7 @@ fun ErrorScreen(error: String) {
                 .padding(horizontal = 16.dp)
         )
     }
-
-    // master one
+    
 }
 
 @Composable
