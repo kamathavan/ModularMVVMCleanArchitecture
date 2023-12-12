@@ -71,10 +71,6 @@ fun ErrorScreen(error: String) {
                 .padding(horizontal = 16.dp)
         )
     }
-
-    // master one
-    // master two
-    // master three
 }
 
 @Composable
