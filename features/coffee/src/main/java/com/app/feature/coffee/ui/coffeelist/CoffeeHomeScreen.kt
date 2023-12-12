@@ -71,7 +71,8 @@ fun ErrorScreen(error: String) {
                 .padding(horizontal = 16.dp)
         )
     }
-    
+
+    // master one
 }
 
 @Composable
@@ -104,6 +105,6 @@ fun CoffeeNavigation(coffees: List<Coffee>) {
     }
 
     // test one
-    // test two 
+    // test two
 
 }
