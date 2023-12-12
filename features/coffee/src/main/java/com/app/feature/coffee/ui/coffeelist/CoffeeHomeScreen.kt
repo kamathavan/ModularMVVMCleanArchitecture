@@ -41,6 +41,9 @@ fun CoffeeHomeScreen(viewModel: CoffeeListViewModel = hiltViewModel()) {
             is CoffeeUiState.Error -> {
                 ErrorScreen(it.message)
             }
+
+            // commit1
+            // commit2
         }
     }
 
@@ -102,5 +105,4 @@ fun CoffeeNavigation(coffees: List<Coffee>) {
             )
         }
     }
-
 }
